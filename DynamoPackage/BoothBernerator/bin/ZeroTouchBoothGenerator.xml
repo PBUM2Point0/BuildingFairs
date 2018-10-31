@@ -1,0 +1,154 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ZeroTouchBoothGenerator</name>
+    </assembly>
+    <members>
+        <member name="M:ZeroTouchBoothGenerator.BoothGen.ZeissBoothData.ByData(System.Double,System.Double)">
+            <summary>
+            Creates a new datatype holding all the data needed to build a 
+            Zeiss boots
+            </summary>
+            <param name="lengthX">Length of the booth in x direction</param>
+            <param name="lengthY">Lenght of the booth in y direction</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZeroTouchBoothGenerator.BoothGen.FloorGenerator.CreateBorder(ZeroTouchBoothGenerator.BoothGen.FloorBorderProperties)">
+            <summary>
+            
+            </summary>
+            <param name="props"></param>
+            <returns></returns>
+        </member>
+        <member name="P:ZeroTouchBoothGenerator.BoothGen.FloorPlateProperties.BorderThickness">
+            <summary>
+            Space between white and normal plates.
+            </summary>
+        </member>
+        <member name="M:ZeroTouchBoothGenerator.BoothGen.FloorProperties.ByData(ZeroTouchBoothGenerator.BoothGen.ZeissBoothData)">
+            <summary>
+            Generates a new FloorProperties object
+            </summary>
+            <param name="data">ZeissBoothData</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZeroTouchBoothGenerator.BoothGen.FlakeboardStripesProperties.ByData(ZeroTouchBoothGenerator.BoothGen.FloorProperties,Revit.Elements.FamilyType,Autodesk.DesignScript.Geometry.Point,System.Double,System.Double,System.Double,System.Double)">
+            <summary>
+            Creates a new FlakeboardStripesProperties object from the given data.
+            </summary>
+            <param name="floorData">FloorData object</param>
+            <param name="flakeboardType">Flakeboard Type</param>
+            <param name="flakeBoardDirection">Flakeboard Direction</param>
+            <param name="desiredAccrossFlakeboardDistance">Accross Flakeboard Distance</param>
+            <param name="flakeboardDistanceToBounds">Distance to booth bounds</param>
+            <param name="flakeboardDistanceAlong">Distance along plates</param>
+            <param name="flakeboardWidth">Board width</param>
+            <param name="flakeboardLength">Board length</param>
+            <returns></returns>
+        </member>
+        <member name="P:ZeroTouchBoothGenerator.BoothGen.RoofProperties.RoofDirection">
+            <summary>
+            Direction of the spaces between the roof.
+            </summary>
+        </member>
+        <member name="M:ZeroTouchBoothGenerator.FillingSpace.FS_Bins.FillBinWith(System.Collections.Generic.List{System.Double},System.Double,System.Double)">
+            <summary>
+            Tries to fill a bin of size binSize with the given sizes.
+            Thereby as less instances of sizes as possible are used.
+            If it is not possible to fill the bin with the given parts, the 
+            last size item will be of custom size with at least the given minSize.
+            </summary>
+            <param name="sizes">Sorted list of element sizes to fill the bin with. Has to begin with the largest item.</param>
+            <param name="binSize"></param>
+            <param name="minSize"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZeroTouchBoothGenerator.FillingSpace.FS_Bins.FillBinWithExtraSides(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            This method generates a bin filling wehre the first and the last
+            part have the same length. All other parts have the given standard
+            length.
+            
+            Example:
+            | |    |    |    | |
+            </summary>
+            <param name="binSize">Size of the bin.</param>
+            <param name="standardSize">Standard part size</param>
+            <param name="minSize">Minimum size of a part.</param>
+            <returns></returns>
+        </member>
+        <member name="T:ZeroTouchBoothGenerator.FillingSpace.FS_XYDirection">
+            <summary>
+            Determines wheter something is in direction X or Y
+            only allowes for X or Y, not both or negative directions.
+            </summary>
+        </member>
+        <member name="M:ZeroTouchBoothGenerator.FillingSpace.Lines.FL_FixedPartFixedSpaceVariableEnd.Create(System.Double,System.Double,System.Boolean,System.Boolean)">
+            <summary>
+            Creates an algorithm to fill a line alternating between, a line length
+            and space length.
+            If space and part length do not add up to the total length, the last 
+            part is of variable size.
+            Example:
+            |S| P |S| P |S| P|
+            </summary>
+            <param name="partLength"></param>
+            <param name="spaceLength"></param>
+            <param name="startWithSpace"></param>
+            <param name="endsWithSpace"></param>
+            <returns></returns>
+        </member>
+        <member name="M:ZeroTouchBoothGenerator.FillingSpace.Lines.FL_Utils.LineLengthsAsRectangles(System.Collections.Generic.IEnumerable{System.Double},System.Double,ZeroTouchBoothGenerator.FillingSpace.FS_XYDirection,System.Double,System.Double)">
+            <summary>
+            Interprets lenghts as a line composed of the given lenghts
+            and creates rectangles with the given width and an offset
+            in the direction accross the line
+            </summary>
+            <param name="lengths">Lenghts to interpret as line</param>
+            <param name="width">Width that the resulting rectangles wil have</param>
+            <param name="direction">Direction of the line</param>
+            <param name="accrossDirectionOffset">Offset of the line accross the line direction (default 0)</param>
+            <param name="alongDirectionOffset">Offset of the line along the line direction (default 0)</param>
+            <returns></returns>
+        </member>
+        <member name="M:ZeroTouchBoothGenerator.FillingSpace.Lines.IFLAlgorithm.FillLine(ZeroTouchBoothGenerator.FillingSpace.Lines.FL_Line)">
+            <summary>
+            Calculates the length and number of parts to fill the given line and returns the lengths.
+            </summary>
+            <param name="line">Line to calculate the lenght and number of parts to be filled for</param>
+            <returns>Lengths of parts that fill the given line.</returns>
+        </member>
+        <member name="T:ZeroTouchBoothGenerator.FillingSpace.Space.FS_LineFilledSpace">
+            A space with Length and width.
+            Dierction indicates the direction of the lines.
+            
+            E.g. 
+            Direction X = 1 (Y = 0)
+            -----
+            -----
+            Direction Y = 1 (X = 0)
+            |||||
+            |||||
+            -> Length
+        </member>
+        <member name="M:ZeroTouchBoothGenerator.FillingSpace.Space.FS_WithLines.Fill(ZeroTouchBoothGenerator.FillingSpace.Space.FS_LineFilledSpace)">
+            <summary>
+            Fills a space with the given algorithms. 
+            Dierction indicates the direction of the lines.
+            
+            E.g. 
+            Direction X = 1 (Y = 0) <para/>
+            ----- <para/>
+            ----- <para/>
+            Direction Y = 1 (X = 0) <para/>
+            ||||| <para/>
+            ||||| <para/>
+            -> Length
+            Direction
+            </summary>
+            <param name="totalLength"></param>
+            <param name="totalWidth"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>
